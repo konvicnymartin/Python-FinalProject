@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 import yfinance as yf
 
 
-st.title('Stocks overview :zap:')
+st.title('Stocks overview')
 
 nlp = spacy.load('en_core_web_sm')
 
@@ -89,17 +89,17 @@ def generate_stock_info(headings):
 
 
 # add an input field to pass the RSS link
-user_input = st.text_input("Type in RSS feed you want to analyze")
+user_input = st.text_input("Type in RSS feed you want to analyze", 'https://www.investing.com/rss/news_25.rss')
 
 # get the financial headlines
 f_headings = extract_text_from_rss(user_input)
 
 ## output the financial info
-output_df = generate_stock_info(fin_headings)
+output_df = generate_stock_info(f_headings)
 output_df.drop_duplicates(inplace = True)
 st.dataframe(output_df)
 
 ## Display the headlines
 with st.expander("Expand for financial stocks news!"):
-    for heading in fin_headings:
+    for heading in f_headings:
         st.markdown("* " + heading.text)
