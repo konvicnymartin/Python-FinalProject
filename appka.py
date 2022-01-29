@@ -49,15 +49,7 @@ def generate_stock_info(headings):
     Then, it get the market data about them from Yahoo
     Finally, it returns dataframe with stocks overview
     """
-    Stock_info_dict = {
-        'Org': [],
-        'Symbol': [],
-        'currentPrice': [],
-        'dayHigh': [],
-        'dayLow': [],
-        'forwardPE': [],
-        'dividendYield': []
-    }
+
     
     stocks_df = pd.read_csv('./SP500.csv')
     for title in headings:
@@ -67,29 +59,28 @@ def generate_stock_info(headings):
                 if stocks_df['Name'].str.contains(ent.text).sum():
                     symbol = stocks_df[stocks_df['Name'].str.contains(ent.text)]['Symbol'].values[0]
                     org_name = stocks_df[stocks_df['Name'].str.contains(ent.text)]['Name'].values[0]
-                    stock_info = yf.Ticker(symbol).info
+                    token_dict['Org'].append(org_name)
                     print(symbol)
                      
-                    stock_info_dict['Org'].append(org_name)
-                    stock_info_dict['Symbol'].append(symbol)
-                        
-                    stock_info_dict['currentPrice'].append(stock_info['currentPrice'])
-                    stock_info_dict['dayHigh'].append(stock_info['dayHigh'])
-                    stock_info_dict['dayLow'].append(stock_info['dayLow'])
-                    stock_info_dict['forwardPE'].append(stock_info['forwardPE'])
-                    stock_info_dict['dividendYield'].append(stock_info['dividendYield'])
+                    token_dict['Symbol'].append(symbol)
+                    stock_info = yf.Ticker(symbol).info
+                    token_dict['currentPrice'].append(stock_info['currentPrice'])
+                    token_dict['dayHigh'].append(stock_info['dayHigh'])
+                    token_dict['dayLow'].append(stock_info['dayLow'])
+                    token_dict['forwardPE'].append(stock_info['forwardPE'])
+                    token_dict['dividendYield'].append(stock_info['dividendYield'])
                 else:
                     pass
             except:
                 pass
 
-    overview_df = pd.DataFrame(Stock_info_dict)
+    overview_df = pd.DataFrame(token_dict)
     return overview_df
 
 
 
 # add an input field to pass the RSS link
-user_input = st.text_input("Type in RSS feed you want to analyze", 'https://www.investing.com/rss/news_25.rss')
+user_input = st.text_input("Type in an additional RSS feed you want to analyze", 'https://seekingalpha.com/feed.xml')
 
 # get the financial headlines
 f_headings = extract_text_from_rss(user_input)
