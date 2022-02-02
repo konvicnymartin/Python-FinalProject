@@ -6,6 +6,7 @@ import streamlit as st
 from spacy import displacy
 from bs4 import BeautifulSoup
 import yfinance as yf
+import matplotlib.pyplot as plt
 
 
 st.title('Stocks overview')
@@ -35,6 +36,7 @@ def extract_text_from_rss(rss_link):
 token_dict = {
     'Org': [],
     'Symbol': [],
+    'Sector': [],
     'currentPrice': [],
     'dayHigh': [],
     'dayLow': [],
@@ -65,6 +67,7 @@ def generate_stock_info(headings):
                     print(symbol)
                     token_dict['Symbol'].append(symbol)
                     stock_info = yf.Ticker(symbol).info
+                    token_dict['Sector'].append(stock_info['sector'])
                     token_dict['currentPrice'].append(stock_info['currentPrice'])
                     token_dict['dayHigh'].append(stock_info['dayHigh'])
                     token_dict['dayLow'].append(stock_info['dayLow'])
@@ -90,6 +93,10 @@ f_headings = extract_text_from_rss(user_input)
 output_df = generate_stock_info(f_headings)
 output_df.drop_duplicates(subset = ['Symbol'], keep = 'first', inplace = True)
 st.dataframe(output_df)
+
+## Graph: Sectors
+st.write('Sector Exposure')
+st.bar_chart(output_df['Sector'])
 
 ## Display the headlines
 with st.expander("Expand for financial stocks news!"):
