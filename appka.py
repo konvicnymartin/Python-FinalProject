@@ -88,7 +88,7 @@ f_headings = extract_text_from_rss(user_input)
 
 ## output the financial info
 output_df = generate_stock_info(f_headings)
-output_df.drop_duplicates(inplace = True)
+output_df.drop_duplicates(subset = ['Symbol'], keep = 'first', inplace = True)
 st.dataframe(output_df)
 
 ## Display the headlines
