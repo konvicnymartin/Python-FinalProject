@@ -54,14 +54,15 @@ def generate_stock_info(headings):
     stocks_df = pd.read_csv('./SP500.csv')
     for title in headings:
         doc = nlp(title.text)
-        for ent in doc.ents:
+        for token in doc.ents:
             try:
-                if stocks_df['Name'].str.contains(ent.text).sum():
-                    symbol = stocks_df[stocks_df['Name'].str.contains(ent.text)]['Symbol'].values[0]
-                    org_name = stocks_df[stocks_df['Name'].str.contains(ent.text)]['Name'].values[0]
+                if stocks_df['Name'].str.contains(token.text).sum():
+                    symbol = stocks_df[stocks_df['Name'].\
+                                        str.contains(token.text)]['Symbol'].values[0]
+                    org_name = stocks_df[stocks_df['Name'].\
+                                        str.contains(token.text)]['Name'].values[0]
                     token_dict['Org'].append(org_name)
                     print(symbol)
-                     
                     token_dict['Symbol'].append(symbol)
                     stock_info = yf.Ticker(symbol).info
                     token_dict['currentPrice'].append(stock_info['currentPrice'])
