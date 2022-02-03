@@ -53,7 +53,19 @@ def generate_stock_info(headings):
     """
 
     
-    stocks_df = pd.read_csv('./SP500.csv')
+    rSP = requests.get('https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')
+    soupSP = BeautifulSoup(rSP.text, 'lxml')
+    tableSP=soupSP.find('table',{'id':'constituents'}).find('tbody').findAll('tr')[1:]
+
+    stocks_df = pd.DataFrame()
+    for row in tableSP:
+        title = row.findAll('td')[1].text.strip()
+        symbol = row.findAll('td')[0].text.strip()
+        sector = row.findAll('td')[3].text.strip()
+        row_ = pd.Series({"Name": title, "Symbol":symbol,"Sector":sector})
+        stocks_df = pd.concat([stocks_df, row_], axis=1)
+
+    stocks_df = stocks_df.T
     for title in headings:
         doc = nlp(title.text)
         for token in doc.ents:
