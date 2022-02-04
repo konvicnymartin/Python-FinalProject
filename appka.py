@@ -108,7 +108,7 @@ st.dataframe(output_df)
 
 ## Graph: Sectors
 st.write('Sector Exposure')
-st.bar_chart(output_df['Sector'])
+st.bar_chart(output_df.groupby('Sector').size())
 
 ## Display the headlines
 with st.expander("Expand for financial stocks news!"):
