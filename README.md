@@ -1,13 +1,13 @@
 # Stock Overviews - Documentation
-## What the project does
+## What does the project do?
 Our project aims to extract names of the publicly traded companies that frequently appear in the headlines of top business-oriented websites by employing the Named Entity Recognition. They are linked with available financial pieces of information (i.e., sector, current stock price, dividend yield, etc.) from Yahoo using the [S&P 500 companies list](https://en.wikipedia.org/wiki/List_of_S%26P_500_companies). The company names are extracted from RSS feeds.
 
 The main output of the project is a table with the information of companies appearing in the headlines of the business-oriented websites. This table is accessible through the open-source app framework streamlit. 
 
-## Why the project is useful?
+## Why is the project useful?
 This tool may point out potential investment opportunities for investors based on the appearances of companies' names in relevant news. If we decide to develop the news-based approach to investments further, this will be one of the essential features in trading algorithms.
 
-## How users can get started with the project?
+## How can users get started with the project?
 The main code for the application is in the [appka.py](appka.py) file. We describe most of the used code in detail in the [jupyter notebook Project](Project.ipynb). The user runs the application through his/her desktop terminal using the following command. It should open up an app in your web browser.
 
     'streamlit run appka.py'
@@ -27,10 +27,10 @@ The application scrapes RSS feeds of [CNBC](https://www.cnbc.com/id/15839135/dev
 
 The final table is downloadable as a CSV file. Also, the respective headlines which were used could be found in the end of the page of the application, simply by clicking on the 'Expand for financial stocks news!' button.
  
-## Where users can get help with your project?
+## Where can users get help with the project?
 In case of any issues, the creators of the code (application) are available for help. The contact information is provided in the 'additional information' section.
 
-## Who maintains and contributes to the project?
+## Who does maintain and contribute to the project?
 Maintenance of the project is conducted by the authors of the project who are happy to answer whatever questions you may have. 
 
 The authors are open to discuss any possible improvements. Potential contributors are more than welcomed.
