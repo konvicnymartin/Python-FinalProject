@@ -13,6 +13,10 @@ st.title('Stocks overview')
 
 nlp = spacy.load('en_core_web_sm')
 
+@st.cache(suppress_st_warning=True)
+def convert_df(df):
+     return df.to_csv().encode('utf-8')
+
 ## get data from RSS feed
 def extract_text_from_rss(rss_link):
     """ Extracts the headlines from the links """
@@ -70,7 +74,8 @@ def generate_stock_info(headings):
         doc = nlp(title.text)
         for token in doc.ents:
             try:
-                if stocks_df['Name'].str.contains(token.text).sum():
+                if stocks_df['Name'].str.contains(token.text).sum() and yf.Ticker(stocks_df[stocks_df['Name'].\
+                                        str.contains(token.text)]['Symbol'].values[0]).info['currentPrice'] > 0:
                     symbol = stocks_df[stocks_df['Name'].\
                                         str.contains(token.text)]['Symbol'].values[0]
                     org_name = stocks_df[stocks_df['Name'].\
@@ -94,7 +99,6 @@ def generate_stock_info(headings):
     return overview_df
 
 
-
 # add an input field to pass the RSS link
 user_input = st.text_input("Type in an additional RSS feed you want to analyze", 'https://seekingalpha.com/feed.xml')
 
@@ -105,6 +109,15 @@ f_headings = extract_text_from_rss(user_input)
 output_df = generate_stock_info(f_headings)
 output_df.drop_duplicates(subset = ['Symbol'], keep = 'first', inplace = True)
 st.dataframe(output_df)
+
+## download button for the dataframe
+csv = convert_df(output_df)
+st.download_button(
+     label="Download data as CSV",
+     data=csv,
+     file_name='stocks_overview_df.csv',
+     mime='text/csv',
+ )
 
 ## Graph: Sectors
 st.write('Sector Exposure')
