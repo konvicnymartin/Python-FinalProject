@@ -1,37 +1,39 @@
-# Stock Overviews
+# Stock Overviews - Documentation
 ## What the project does
-Our project aims to extract names of the publicly traded companies that frequently appear in the headlines of top business-oriented websites. Consequently, we will link them with available financial pieces of information (i.e., current stock price, dividend yield, etc.) from Yahoo. We will get the company names from RSS feeds.
+Our project aims to extract names of the publicly traded companies that frequently appear in the headlines of top business-oriented websites by employing the Named Entity Recognition. They are linked with available financial pieces of information (i.e., sector, current stock price, dividend yield, etc.) from Yahoo using the [S&P 500 companies list](https://en.wikipedia.org/wiki/List_of_S%26P_500_companies). The company names are extracted from RSS feeds.
 
-## Why the project is useful
+The main output of the project is a table with the information of companies appearing in the headlines of the business-oriented websites. This table is accessible through the open-source app framework streamlit. 
+
+## Why the project is useful?
 This tool may point out potential investment opportunities for investors based on the appearances of companies' names in relevant news. If we decide to develop the news-based approach to investments further, this will be one of the essential features in trading algorithms.
 
-## How users can get started with the project
-The main output of the project is a table with the information of companies that appeared in the headlines of the business-oriented websites. This table is accessible through the streamlit application. To be able to use this application, one has to have installed streamlit package (Please, refer to the section 'additional information' if you do not have it istalled). 
-
-The main code for the application is in the [appka.py](appka.py) file. The user runs the application through his/her desktop terminal using:
+## How users can get started with the project?
+The main code for the application is in the [appka.py](appka.py) file. We describe most of the used code in detail in the [jupyter notebook Project](Project.ipynb). The user runs the application through his/her desktop terminal using the following command. It should open up an app in your web browser.
 
     'streamlit run appka.py'
+
+To run it properly, it is crucial to install all relevant packages, especially streamlit, using:
+
+    'pip install <package_name>'
+
+Secondly, if we try to run it in our local system, we will have to download the pre-trained core language model from the spaCy library to extract companies in a headline first using the following command:
+
+    'python -m spacy download en_core_web_sm'
+
     
-code. The code is running approximately 10 minutes. When the procedure is finished, the table with the companies names and their respective informations will pop up, together with the simple bar chart. The bar chart gives the information of the number of companies in each sector. Together with information already contained in the table, the potential users can see which sectors are mostly discussed in the respective business-oriented websites.
+The application usually runs for approximately 10 minutes (depending on the computer's computational power). When the procedure is finished, the table with the companies' names and their respective pieces of information will pop up, together with the simple bar chart. In addition to the information contained in the table, the potential users can see discussed companies grouped by sector in the following bar chart.
 
-The business-oriented websites included in the code are from CNBC, yahoo finance and WSJ. The user can add his/her own RSS feed by copying respective RSS feed adress into the area in the application. As an example, the RSS feed from Seeking Alpha is provided:
+The application scrapes RSS feeds of [CNBC](https://www.cnbc.com/id/15839135/device/rss/rss.html?fbclid=IwAR2o0zeWtmgEwZob45_F6e02pkTVo9uBGL0VI1GQv8mPyScEFY-hn9t089Y), [Yahoo Finance](https://finance.yahoo.com/news/rssindex), and [WSJ](https://feeds.a.dj.com/rss/RSSMarketsMain.xml?fbclid=IwAR17gY8vV2SdoTLP_35v7zGYmPireg5xIX_y1VEgPYRoXVd5jVouoKRlXAc) to extract names of the publicly traded companies that frequently appear in the headlines. Additionally, a user can add an RSS feed by copying the respective RSS feed link into the app text area in the web browser. The RSS feed of [Seeking Alpha](https://seekingalpha.com/feed.xml) is the default input. The RSS feeds monitor websites for new content. Therefore, the table contains only companies from recent headlines. Although the number of items in an RSS feed is theoretically unlimited, some news websites provide a certain number of posts (per day) in it.
 
-    https://seekingalpha.com/feed.xml
-
-The final table can be downloaded as a CSV file. Also, the respective headlines which were used could be found in the end of the page of the application, simply by clicking on the 'Expand for financial stocks news!' button.
+The final table is downloadable as a CSV file. Also, the respective headlines which were used could be found in the end of the page of the application, simply by clicking on the 'Expand for financial stocks news!' button.
  
-## Where users can get help with your project
+## Where users can get help with your project?
 In case of any issues, the creators of the code (application) are available for help. The contact information is provided in the 'additional information' section.
 
-## Who maintains and contributes to the project
+## Who maintains and contributes to the project?
 Maintenance of the project is conducted by the authors of the project who are happy to answer whatever questions you may have. 
 
 The authors are open to discuss any possible improvements. Potential contributors are more than welcomed.
-
-## Additional information
-Code for downloading a streamlit package:
-
-    'pip install streamlit'
 
 Contact information:
  - 66805807@fsv.cuni.cz (Martin Konvičný),

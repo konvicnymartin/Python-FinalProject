@@ -120,7 +120,7 @@ st.download_button(
  )
 
 ## Graph: Sectors
-st.write('Sector Exposure')
+st.write('Sectors')
 st.bar_chart(output_df.groupby('Sector').size())
 
 ## Display the headlines
