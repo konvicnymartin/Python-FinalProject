@@ -28,7 +28,7 @@ The application scrapes RSS feeds of [CNBC](https://www.cnbc.com/id/15839135/dev
 The final table is downloadable as a CSV file. Also, the respective headlines which were used could be found in the end of the page of the application, simply by clicking on the 'Expand for financial stocks news!' button.
  
 ## Where can users get help with the project?
-In case of any issues, the creators of the code (application) are available for help. The contact information is provided in the 'additional information' section.
+In case of any issues, the creators of the code (application) are available for help. The contact information is provided below in the next section.
 
 ## Who does maintain and contribute to the project?
 Maintenance of the project is conducted by the authors of the project who are happy to answer whatever questions you may have. 
