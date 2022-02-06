@@ -13,9 +13,9 @@ st.title('Stocks overview')
 
 nlp = spacy.load('en_core_web_sm')
 
+## function for download button
 @st.cache(suppress_st_warning=True)
 def convert_df(df):
-    """ Download button for the table """
      return df.to_csv().encode('utf-8')
 
 ## get data from RSS feed
